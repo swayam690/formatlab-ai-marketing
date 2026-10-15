@@ -1,0 +1,4 @@
+Flask<3,>=2.2
+
+[ai]
+google-genai>=1.0

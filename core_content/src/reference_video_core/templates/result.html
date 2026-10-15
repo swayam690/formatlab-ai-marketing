@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Automatic Edit</title>
+    {% if job.status not in ["complete", "failed", "needs different source footage"] %}<meta http-equiv="refresh" content="3">{% endif %}
+    <style>
+      body { background: #111827; color: #e5e7eb; font-family: system-ui, sans-serif; margin: 0; }
+      main { max-width: 620px; margin: 10vh auto; padding: 32px; }
+      section { background: #1f2937; border-radius: 12px; margin: 16px 0; padding: 20px; }
+      a { color: #34d399; } .warning { color: #fbbf24; } li { margin: 8px 0; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>{% if job.status == "complete" %}Edit ready{% elif job.status == "needs different source footage" %}Footage needs adjustment{% elif job.status == "failed" %}Edit failed{% else %}Creating your edit{% endif %}</h1>
+      {% if job.status not in ["complete", "failed", "needs different source footage"] %}<p>This can take a few minutes while Gemini processes both videos. Current step: <strong>{{ job.status }}</strong>.</p>{% endif %}
+      {% if job.error %}<section><p class="warning">{{ job.error }}</p></section>{% endif %}
+      {% if job.report %}
+      <section>
+        <p><strong>Compatibility:</strong> {{ job.report.score }}/100 ({{ job.report.analyzed_by }})</p>
+        <p><strong>Reference format:</strong> {{ job.report.reference_content_type }}</p>
+        <p><strong>Your footage:</strong> {{ job.report.source_content_type }}</p>
+        <h2>What to provide</h2>
+        <ul>{% for item in job.report.guidance %}<li>{{ item }}</li>{% endfor %}</ul>
+        {% if job.report.mismatches %}<p class="warning">{% for item in job.report.mismatches %}{{ item }} {% endfor %}</p>{% endif %}
+      </section>
+      {% endif %}
+      {% if job.status == "complete" and job.plan %}
+      <section>
+        <p>Created {{ job.plan.clips|length }} clips for a {{ '%.1f'|format(job.plan.output_duration) }} second edit.</p>
+        <p><a href="/jobs/{{ job_id }}/download">Download edited video</a></p>
+      </section>
+      {% endif %}
+      <p><a href="/">Start another edit</a></p>
+    </main>
+  </body>
+</html>

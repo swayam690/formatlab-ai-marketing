@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reference-video-core"
+version = "0.1.0"
+description = "Core planning and rendering primitives for reference-based video editing"
+requires-python = ">=3.11"
+dependencies = ["Flask>=2.2,<3"]
+
+[project.optional-dependencies]
+ai = ["google-genai>=1.0"]
+
+[project.scripts]
+reference-video-ui = "reference_video_core.web:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

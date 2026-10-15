@@ -1,0 +1,23 @@
+{
+  "name": "formatlab-landing",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "css": "node node_modules/@tailwindcss/cli/dist/index.mjs -i src/app/globals.source.css -o src/app/globals.css",
+    "dev": "node node_modules/@tailwindcss/cli/dist/index.mjs -i src/app/globals.source.css -o src/app/globals.css && next dev",
+    "build": "node node_modules/@tailwindcss/cli/dist/index.mjs -i src/app/globals.source.css -o src/app/globals.css && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.0.0"
+  }
+}

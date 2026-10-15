@@ -1,0 +1,2 @@
+[console_scripts]
+reference-video-ui = reference_video_core.web:main

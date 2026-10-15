@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: reference-video-core
+Version: 0.1.0
+Summary: Core planning and rendering primitives for reference-based video editing
+Requires-Python: >=3.11
+Requires-Dist: Flask<3,>=2.2
+Provides-Extra: ai
+Requires-Dist: google-genai>=1.0; extra == "ai"
